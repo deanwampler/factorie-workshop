@@ -9,7 +9,11 @@ To view the workshop, open [index.html](index.html).
 
 Please set up the workshop software before the workshop if you want to do the exercises during the workshop.
 
-There are two parts, setting up the workshop and setting up FACTORIE itself.
+There are three parts, installing Java, if necessary, setting up the workshop, and setting up FACTORIE itself.
+
+### Install Java
+
+If you don't already have the Java Developer Kit (JDK), versions 6, 7, or 8, installed, go to <http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html> to install it.
 
 ### Fetch the Workshop from GitHub
 
@@ -28,34 +32,6 @@ As an alternative, on the [workshop page](https://github.com/deanwampler/factori
 ### Download a Zip of the Repo
 
 On the [workshop page](https://github.com/deanwampler/factorie-workshop), in the column on the right-hand side of the page is button labeled *Download ZIP*. Download the zip file and expand it somewhere convenient.
-
-### Install Scala
-
-Scala is a modern programming language that runs on the Java Virtual Machine (JVM) and interops with software written in Java. FACTORIE is written in Scala and you'll need to install it for the workshop. (We'll cover Scala syntax details as needed.)
-
-Go to <http://scala-lang.org/download> and follow the instructions for installing the current version of Scala (version 2.10.4 at the time of this writing).
-
-Verify that the `scala` command is properly setup in your environment. Open a command window, e.g., a `bash` shell in Mac OS X, Linux, and Cygwin on Windows, or a Windows `cmd` window. Type the following command:
-
-```
-scala
-```
-
-You should see the following:
-
-```
-[info] Starting scala interpreter...
-[info]
-Welcome to Scala version 2.10.4 (Java HotSpot(TM) 64-Bit Server VM, Java 1.7.0_45).
-Type in expressions to have them evaluated.
-Type :help for more information.
-
-scala>
-```
-
-You are now in the Scala interactive interpreter, or REPL (read, eval, print loop). At the `scala>` prompt, type a simple expression like `3 + 4`. It will answer `7`. 
-
-You can play with the REPL if you want. Try `:help`, for example (note the colon `:`). When you're done, enter `:quit` to leave the Scala REPL.
 
 ### Run `sbt` to Setup the Workshop
 
@@ -136,8 +112,6 @@ Type :help for more information.
 
 scala>
 ```
-
-(It's okay if the version number shown at the prompt is different than the version of Scala installed previously.)
 
 At the `scala>` prompt, type a simple expression like `3 + 4`. It will answer `7`. 
 
