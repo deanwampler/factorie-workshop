@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>FACTORIE Tutorial</title>
+
+    <meta name="description" content="A tutorial for the FACTORIE library for graphical models.">
+    <meta name="author" content="Dean Wampler">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="upper-left">
+      <a href="http://typesafe.com"><img src="images/typesafe.png"></a>
+    </div>
+    
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section data-markdown>
+          <script type="text/template">
+            # FACTORIE Tutorial
+
+            ## FACTORIE 
+
+            [factorie.cs.umass.edu/](http://factorie.cs.umass.edu/])
+
+            A Scala toolkit for deployable probabilistic modeling.
+
+            It provides a succinct language for creating _relational factor graphs_, estimating parameters, and performing inference.
+          </script>
+        </section>
+        
+        <section data-markdown>
+          <script type="text/template">
+            ## Goals Today
+
+            - Learn about Probabilistic Graphical Models <!-- .element: class="fragment" data-fragment-index="1" -->
+            - Learn about FACTORIE <!-- .element: class="fragment" data-fragment-index="2" -->
+            - Total world domination!! <!-- .element: class="fragment" data-fragment-index="3" -->
+          </script>
+        </section>
+
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Navigating the Slides
+
+            - Press ESC to enter the slide overview.
+            - Click the arrows in the lower right corner to navigate.
+            - Or use the arrow keys.
+          
+            <small>(Slides written in [reveal.js](http://lab.hakim.se/reveal-js/).)</small>
+          </script>
+
+          <aside class="notes">
+            Press b or period on your keyboard to enter the 'paused' mode. This mode is helpful when you want to take distracting slides off the screen
+            during a presentation.
+          </aside>
+        </section>
+
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Generating a PDF
+
+            1. Open [index.html?print-pdf](index.html?print-pdf).
+            2. Print <!-- .element: class="fragment" data-fragment-index="2" -->
+            3. Profit! <!-- .element: class="fragment" data-fragment-index="3" -->
+          
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## What Are Probabilistic Graphical Models? (PGMs)
+
+            - _Graphical_: Represented by nodes and edges.
+            - _Probabilistic_: Edges carry probabilities of influence.
+            - _Model_: Representation of a real domain.
+          </script>
+        </section>
+
+        <section>
+          <h2>Bayesian Network</h2>
+
+          <p><img alt="Example Bayesian Network" src="images/1000px-SimpleBayesNet.png" height="450" width="700"/img></p>
+          <p><small>From <a href="wikipedia.org/wiki/File:SimpleBayesNet.svg">en.wikipedia.org/wiki/File:SimpleBayesNet.svg</a></small></p>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Probability of Rain or No Rain
+
+            - $P(Rain) = 0.20$
+            - $P(\neg Rain) = 0.80$
+            - Adds to $1.0$ as it must!
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Probability of X Given Y
+            
+            - $P(Sprinkler|Rain) = 0.01$
+            - $P(\neg Sprinkler|Rain) = 0.99$
+            - 
+            - $P(Sprinkler|\neg Rain) = 0.4$
+            - $P(\neg Sprinkler|\neg Rain) = 0.6$
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Probability of X given Y and Z
+
+            - $P(Wet|Sprinkler, Rain) = 0.99$
+            - $P(\neg Wet|Sprinkler, Rain) = 0.01$
+            - 
+            - $P(Wet|\neg Sprinkler, Rain) = 0.80$
+            - $P(\neg Wet|\neg Sprinkler, Rain) = 0.20$
+            - 
+            - $P(Wet|Sprinkler, \neg Rain) = 0.90$
+            - $P(\neg Wet|Sprinkler, \neg Rain) = 0.10$
+            - 
+            - $P(Wet|\neg Sprinkler, \neg Rain) = 0.0$
+            - $P(\neg Wet|\neg Sprinkler, \neg Rain) = 1.0$
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Joint Probability Function
+
+            - Prob. that it is web, the sprinkler is on and it's raining:
+             
+             $P(W,S,R) = P(W|S,R)P(S|R)P(R)$
+            
+          </script>
+        </section>
+
+        <section>
+            <h2>Probability the Grass is Wet?</h2>
+            <ul>
+            <li>
+            $P(Wet) = \sum\limits_{s = Sprinkler,r = Rain} P(Wet|s, r)P(s|r)P(r)$
+            </li>
+            <li>
+            $P(Wet) = P(T_{W}|F_{S},F_{R})P(F_{S}|F_{R})P(F_{R}) + $<br/>$P(T_{W}|T_{S},F_{R})P(T_{S}|F_{R})P(F_{R}) + $<br/>$P(T_{W}|F_{S},T_{R})P(F_{S}|T_{R})P(T_{R}) + $<br/>$P(T_{W}|T_{S},T_{R})P(T_{S}|T_{R})P(T_{R})$
+            </li>
+            <li>
+            $P(Wet) = 0.0 + 0.9*0.4*0.8 + $<br/>$0.8*0.99*0.2 + 0.99*0.01*0.20$
+            </li>
+            <li>
+            $P(Wet) = 0.0 + 0.288 + 0.158 + 0.002$
+            </li>
+            <li>
+            $P(Wet) = 0.448$
+            </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Probability the Grass is Wet and It Hasn't Rained?</h2>
+            <ul>
+            <li>
+            $P(Wet|\neg R) = \sum\limits_{s = Sprinkler} P(Wet|s, \neg R)P(s|\neg R)P(\neg R)$
+            </li>
+            <li>But, $P(\neg R)$ is now $1.0$:
+            <li>
+            $P(Wet|\neg R) = P(T_{W}|F_{S},F_{R})P(F_{S}|F_{R}) + $<br/>$P(T_{W}|T_{S},F_{R})P(T_{S}|F_{R})$
+            </li>
+            <li>
+            $P(Wet|\neg R) = 0.0 + 0.9*0.4$
+            </li>
+            <li>
+            $P(Wet|\neg R) = 0.360$
+            </li>
+            </ul>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Uses for Bayesian Networks
+
+            - Decision Support Systems
+              - Medical Diagnosis Decision Trees
+            - Document Classification 
+            - Information Retrieval
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Disadvantages of Bayesian Networks
+
+            - Pairwise dependencies that introduce cycles.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Markov Random Field
+            ## (a.k.a. Markov Network) 
+
+            ![Example Hidden Markov Model](images/Markov_random_field_example.png)
+            <small>From [http://upload.wikimedia.org/wikipedia/en/f/f7/Markov_random_field_example.png](http://upload.wikimedia.org/wikipedia/en/f/f7/Markov_random_field_example.png)</small>
+          </script>
+        </section>
+
+        <section>
+          <h2>Markov Random Field</h2>
+          <ul>
+          <li>Undirected dependencies, so cycles allowed.</li>
+          <li><b>Markov Property:</b> Non-adjacent variables are conditionally <em>independent</em>.</li>
+          </ul>
+          <img alt="Example Hidden Markov Model" src="images/Markov_random_field_example.png"/>
+        </section>
+
+        <section>
+          <h2>Hidden Markov Model</h2>
+          <img alt="Example Hidden Markov Model" src="images/HMMGraph.svg" height="450" width="700"/>
+          <small>From <a href="http://en.wikipedia.org/wiki/File:HMMGraph.svg">en.wikipedia.org/wiki/File:SimpleBayesNet.svg</a></small>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Hidden Markov Model
+
+            - Still use the **Markov Property**
+            - Time-oriented state changes/transitions.
+            - Hidden states inferred from observables.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Uses for Hidden Markov Model (1/2)
+
+            - Cryptanalysis
+            - Speech recognition
+            - Speech synthesis
+            - Part-of-speech tagging
+            - Machine translation
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Uses for Hidden Markov Model (2/2)
+            
+            - Gene prediction
+            - Alignment of bio-sequences
+            - Protein folding
+            - Time Series Analysis
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Factor Graphs
+            
+            ![Example Factor Graph](images/FactorGraph.png)
+            <small>From <http://en.wikipedia.org/wiki/File:Factorgraph.jpg></small>
+          </script>
+        </section>
+
+        <section>
+          <h2>Factor Graphs</h2>
+          <ul>
+            <li><em>Factored</em> function: $g(X_{1}, X_{2}, ..., X_{n}) = \prod\limits_{j=1}^{m} f_{j}(S_{j})$</li>
+            <li>where $S_{j} \subseteq {X_{1}, X_{2}, ..., X_{n}}$</li>
+            <li>Forms a <em>bipartite</em> graph</li>
+          </ul>
+          <img alt="Example Factor Graph" src="images/FactorGraph2.png" height="250"/>
+        </section>
+
+        <section>
+          <ul>
+            <li>$g(X_{1}, X_{2}, X_{3}) = f_{1}(X_{1})f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})f_{4}(X_{2},X_{3})$</li>
+          </ul>
+          <img alt="Example Factor Graph" src="images/FactorGraph.png" height="400"/>
+          <ul>
+            <li>Note that $f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})$ form a <em>cycle</em>.
+        </section>
+
+
+        <section>
+          <h2>Compute the Marginal of Variable $X_{k}$</h2>
+          <ul>
+            <li>$g_{k}(X_{k}) = \sum\limits_{i=1, i \neq k}^{n} g(X_{1},X_{2},...,X_{n})$</li>
+          </ul>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Factor Graphs
+
+            Provide efficient computation of *marginal distributions* in Bayesian Networks using the *sum-product message-passing algorithm* (a.k.a. *belief propagation*: calculation of the marginal distribution for unobserved nodes,conditional on observed nodes.)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Factor Graphs
+
+            - Bayesian Networks and Markov Networks can be represented as Factor Graphs, providing efficient belief propagation.
+            - But if you need a *generative model* (where you need to generate data points of any values of $X_{i}$, not marginalize over some of them), Bayesian Networks work best.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Factor Graphs: Examples
+
+            - *Turbo code* - Error correction algos that are so efficient, they enable near-optimal capacity in communication channels.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## What Are Relational Factor Graphs?
+
+            - TODO
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            # What is FACTORIE?
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Code Sample
+
+            ```scala
+package cc.factorie.tutorial
+import scala.io.Source
+import java.io.File
+import cc.factorie._
+import app.classify
+import cc.factorie.variable.{LabeledCategoricalVariable, BinaryFeatureVectorVariable, CategoricalVectorDomain, CategoricalDomain}
+import cc.factorie.app.classify.backend.OnlineLinearMulticlassTrainer
+
+object BookInfoGain {
+  object DocumentDomain extends CategoricalVectorDomain[String]
+  class Document(labelString: String, words:Seq[String]) extends BinaryFeatureVectorVariable[String](words) {
+    def domain = DocumentDomain
+    var label = new Label(labelString, this)
+    // Read file, tokenize with word regular expression, and add all matches to this BinaryFeatureVectorVariable
+    //"\\w+".r.findAllIn(Source.fromFile(file, "ISO-8859-1").mkString).foreach(regexMatch => this += regexMatch.toString)
+  }
+  object LabelDomain extends CategoricalDomain[String]
+  class Label(name: String, val document: Document) extends LabeledCategoricalVariable(name) {
+    def domain = LabelDomain
+  }
+
+  var useBoostedClassifier = false
+
+  def main(args: Array[String]): Unit = {
+    implicit val random = new scala.util.Random(0)
+    if (args.length < 2)
+      throw new Error("Usage: directory_class1 directory_class2 ...\nYou must specify at least two directories containing text files for classification.")
+
+    // Read data and create Variables
+    var docLabels = new collection.mutable.ArrayBuffer[Label]
+    for (filename <- args) {
+      val bookFile = new File(filename)
+      if (!bookFile.exists) throw new IllegalArgumentException("Directory " + filename + " does not exist.")
+      "\\w+".r.findAllIn(Source.fromFile(bookFile).mkString).toSeq.grouped(500).foreach(words => docLabels += new Document(bookFile.getName, words.filter(!cc.factorie.app.strings.Stopwords.contains(_))).label)
+    }
+
+    val infogains = new classify.InfoGain(docLabels, (l: Label) => l.document)
+    println(infogains.top(20).mkString(" "))
+    println()
+//    val plig = new classify.PerLabelInfoGain(docLabels)
+//    for (label <- LabelDomain) println(label.category+": "+plig.top(label, 20))
+//    println()
+    val pllo = new classify.PerLabelLogOdds(docLabels, (l: Label) => l.document)
+    for (label <- LabelDomain) println(label.category+": "+pllo.top(label, 40))
+    println()
+
+    // Make a test/train split
+    val (testSet, trainSet) = docLabels.shuffle.split(0.5)
+    val trainLabels = new collection.mutable.ArrayBuffer[Label] ++= trainSet
+    val testLabels = new collection.mutable.ArrayBuffer[Label] ++= testSet
+
+    val trainer = new OnlineLinearMulticlassTrainer()
+    val classifier = trainer.train(trainLabels, trainLabels.map(_.document))
+    val testTrial = new classify.Trial[Label,Document#Value](classifier, trainLabels.head.domain, _.document.value)
+    testTrial ++= testLabels
+
+    val trainTrial = new classify.Trial[Label,Document#Value](classifier, trainLabels.head.domain, _.document.value)
+    trainTrial ++= trainLabels
+
+    println("Train accuracy = " + trainTrial.accuracy)
+    println("Test  accuracy = " + testTrial.accuracy)
+  }
+}
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## About FACTORIE 
+
+            - TODO
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Learning FACTORIE 
+
+            - FACTORIE has its own Scala idioms.
+            - We could get bogged down in the details.
+              - There is a detailed [Tutorial](http://factorie.cs.umass.edu/tutorial.html).
+
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Learning FACTORIE 
+
+            - Instead, let's start with examples from the [Users Guide](http://factorie.cs.umass.edu/userguide.html)
+
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Resources - Factor Graphs
+
+            - [IEEE Signal Processing, Jan. 2004](http://www.robots.ox.ac.uk/~parg/mlrg/papers/factorgraphs.pdf) (PDF).
+            - [Introduction to Factor Graphs](http://people.binf.ku.dk/~thamelry/MLSB08/hal.pdf) (PDF).
+            - [Relational Factor Graphs](http://courses.cs.washington.edu/courses/cse574/05sp/slides/rfg-lin.ppt) (PPT).
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Resources - PGMs
+
+            - [Machine Learning: a Probabilistic Perspective](http://www.cs.ubc.ca/~murphyk/MLbook/) (Text book).
+            - [Probabilistic Graphical Models](http://pgm.stanford.edu/) (Text book - definitive tome).
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Online Courses
+
+            - [Stanford University: Probabilistic Graphical Models](https://www.coursera.org/course/pgm) (Coursera).
+            - [Machine Learning and Probabilistic Graphical Models](http://www.cedar.buffalo.edu/~srihari/CSE574/) (Univ. of Buffalo).
+            - [Intro. to Artificial Intelligence](https://www.udacity.com/course/cs271) (Udacity).
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Resources: Probabilistic Programming
+
+            - [Beau Cronin: Probabilistic Programming (Strata Talk)](https://speakerdeck.com/player/b3ea79c07720013179731e7fd7daf351)
+            - [Probabilistic Programming and Bayesian Methods for Hackers](https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers)
+            - [probabilistic-programming.org](http://probabilistic-programming.org/wiki/Home)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            # Questions?
+
+            ## Dean Wampler 
+
+            - [dean.wampler@typesafe.com](mailto:dean.wampler@typesafe.com)
+            - [@deanwampler](http://twitter.com/deanwampler)
+            - [typesafe.com](http://typesafe.com)
+            - [factorie.cs.umass.edu/](http://factorie.cs.umass.edu/])
+            - [github.com/deanwampler/factorie-workshop](https://github.com/deanwampler/factorie-workshop)
+          </script>
+        </section>
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        slideNumber: true,
+        history: true,
+        center: true,
+
+        theme: 'solarized', // available themes are in /css/theme
+        // theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: 'fade',
+        // transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        math: {
+          mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+          config: 'TeX-AMS_HTML-full',  // See http://docs.mathjax.org/en/latest/config-files.html
+          TeX: {
+            extensions: ["AMSmath.js", "AMSsymbols.js"]
+          }
+        },
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/math/math.js', async: true }
+        ]
+      });
+
+    </script>
+  </body>
+</html>

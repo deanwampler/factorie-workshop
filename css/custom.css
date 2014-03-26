@@ -1,0 +1,25 @@
+.reveal diagram {
+  max-width: 95%;
+  max-height: 70%;
+}
+
+tiny {
+  font-size: .3em;
+  color: grey;
+}
+
+upper-left {
+  display: block;
+  position: absolute;
+  bottom: 10px;
+  width: 95%;
+  margin: 5px auto;
+  font-family: Helvetica;
+  text-align: left;
+  font-size: 0.25em;
+}
+
+img {
+  border-width: 1px;
+  border-color: grey;
+}
