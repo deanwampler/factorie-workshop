@@ -1,0 +1,3 @@
+: ${FACTORIE_HOME:=../factorie-git}
+
+$FACTORIE_HOME/bin/fac "$@"

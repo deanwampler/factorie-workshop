@@ -529,6 +529,41 @@ object BookInfoGain {
 
         <section data-markdown>
           <script type="text/template">
+            ## LDA Example #1 - Shakespeare's plays.
+
+            - LDA with Gibbs Sampling, 100 Iterations:
+            ```
+            bin/fac lda --read-dirs data/shakespeare --num-topics 20 --num-iterations 100 
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## LDA Example #2 - Enron Emails
+
+            - A large corpus of emails from Enron criminal investigation.
+              - <http://www.cs.cmu.edu/~./enron/>
+            - LDA with Gibbs Sampling, 100 Iterations:
+            ```
+            bin/fac lda --read-dirs data/shakespeare --num-topics 20 --num-iterations 100 
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Log-linear Classifier
+
+            - Train a log-linear classifier using maximum likelihood estimation:
+            ```
+            bin/fac classify --read-text-dirs dir1 dir2 --write-classifier mymodel.factorie
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
             ## Resources - Factor Graphs
 
             - [IEEE Signal Processing, Jan. 2004](http://www.robots.ox.ac.uk/~parg/mlrg/papers/factorgraphs.pdf) (PDF).
