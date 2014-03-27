@@ -355,9 +355,89 @@
           </script>
         </section>
 
+
         <section data-markdown>
           <script type="text/template">
-            ## Code Sample
+            ## About FACTORIE 
+
+            > FACTORIE is a toolkit for deployable probabilistic modeling, implemented as a software library in [Scala](http://scala-lang.org). It provides its users with a succinct language for creating factor graphs, estimating parameters and performing inference.
+
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## FACTORIE Facts 
+
+            - Developed by a team at [U. Mass](http://factorie.cs.umass.edu/index.html).
+            - Written in and uses [Scala](http://scala-lang.org) as the programming language.
+            - Directed and undirected prob. graphical models.
+            - Designed for prototyping to large-scale deployments.
+            - Designed for easy novice use, with progressively-deeper capabilities.
+
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## FACTORIE Facts 
+
+            - Built-in support for:
+              - Random variables and factors
+              - Different learning and inference techniques.
+            - Scales to billions of variables and factors.
+
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## FACTORIE Pre-built Models and Tools  
+
+            - Classification
+              - Incl. document classification with MaxEnt, NaiveBayes, SVMs and Decision Trees.
+            - Linear Regression
+            - linear-chain Conditional Random Fields
+            - Topic Modeling 
+              - Incl. Latent Dirichlet Allocation and variants.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## FACTORIE Pre-built Models and Tools  
+
+            - Natural Language Processing
+              - Incl.pipeline components lie tokenization, sentence segmentation, part-of-speech tagging, named entity recognition, dependency parsing and within-document coreference.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## About FACTORIE 
+
+            - See [FACTORIE UserGuide - Introduction](http://factorie.cs.umass.edu/tutorials/UsersGuide01Introduction.scala.html) for a detailed list of strengths, weaknesses, and features supported.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Simple Command-line Examples 
+
+            - LDA with Gibbs Sampling, 100 Iterations:
+            ```
+            bin/fac lda --read-dirs mytextdir --num-topics 20 --num-iterations 100 
+            ```
+            - Train a log-linear classifier using maximum likelihood estimation:
+            ```
+            bin/fac classify --read-text-dirs dir1 dir2 --write-classifier mymodel.factorie
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Detailed Code Sample
 
             ```scala
 package cc.factorie.tutorial
@@ -424,14 +504,6 @@ object BookInfoGain {
   }
 }
             ```
-          </script>
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
-            ## About FACTORIE 
-
-            - TODO
           </script>
         </section>
 
