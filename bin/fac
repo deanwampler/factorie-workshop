@@ -1,3 +1,56 @@
-: ${FACTORIE_HOME:=../factorie-git}
+#!/bin/bash
 
-$FACTORIE_HOME/bin/fac "$@"
+# Adapted from the FACTORIE bin/fac shell script, with a few options not in
+# that script, like "classify"
+
+bindir=$(dirname $0)
+projectdir=$(dirname $bindir)
+
+cp=$projectdir/src/main/resources:$projectdir/target/classes
+
+factoriejar=$(echo $projectdir/lib/factorie-*.jar)
+if [ -e $factoriejar ] ; then
+  cp=$cp:$factoriejar
+else
+  echo "No FACTORIE jar found in $projectdir/lib"
+  exit -1
+fi
+
+# This makes -Xmx value command-line changeable
+: ${MEMORY:=3g}
+
+JAVA_COMMAND="java -Xmx$MEMORY -ea -Djava.awt.headless=true -Dfile.encoding=UTF-8 -server -classpath $cp"
+
+CMD=$1
+shift
+
+help()
+{
+cat <<EOF
+FACTORIE commands: 
+
+  nlp        Run NLP server listening on a socket (pos, ner, parse, coref,... available)
+  lda        Train and use a latent Dirichlet allocation model
+  classify   Train a classifier
+  inter      Interpreter (REPL)
+  run class  Run "main" in "class"
+
+Include --help with any option for more information
+EOF
+}
+
+CLASS=
+
+case $CMD in
+  nlp) CLASS=cc.factorie.app.nlp.NLP;;
+  lda) CLASS=cc.factorie.app.topics.lda.LDA;;
+  classify) CLASS=cc.factorie.app.classify.Classify;;
+  inter) CLASS=cc.factorie.util.Interpreter;;
+  run) CLASS=$1; shift;;
+  *) echo "Unrecognized command: $CMD"; help; exit 1;;
+esac
+
+# NOTE: invoke with NOOP=echo bin/fac ... to just echo the command, but not run it.
+echo "running: $JAVA_COMMAND $CLASS $@"
+$NOOP $JAVA_COMMAND $CLASS "$@"
+

@@ -531,9 +531,25 @@ object BookInfoGain {
           <script type="text/template">
             ## LDA Example #1 - Shakespeare's plays.
 
-            - LDA with Gibbs Sampling, 100 Iterations:
+            - LDA with Gibbs Sampling, 10 Iterations:
             ```
-            bin/fac lda --read-dirs data/shakespeare --num-topics 20 --num-iterations 100 
+            exercises/lda shakespeare
+            ```
+            - It runs this command:
+            ```
+            bin/fac lda --read-dirs data/shakespeare \ 
+              --num-topics 20 --num-iterations 10 
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## LDA Example #1 - Shakespeare's plays.
+
+            - You can specify different `--num-topics` and `--num-terations` arguments:
+            ```
+            exercises/lda shakespeare --num-topics 50 --num-iterations 100 
             ```
           </script>
         </section>
@@ -544,9 +560,49 @@ object BookInfoGain {
 
             - A large corpus of emails from Enron criminal investigation.
               - <http://www.cs.cmu.edu/~./enron/>
-            - LDA with Gibbs Sampling, 100 Iterations:
+            - We'll use a set processed for SPAM classification:
+              - <http://www.aueb.gr/users/ion/data/enron-spam/>
+            - LDA with Gibbs Sampling, 10 Iterations:
             ```
-            bin/fac lda --read-dirs data/shakespeare --num-topics 20 --num-iterations 100 
+            exercises/lda enron
+            ```
+            - It runs this command:
+            ```
+            bin/fac lda --read-dirs data/enron_spam_ham \ 
+              --num-topics 20 --num-iterations 10 
+            ```
+            - Try other values for `--num-topics` and `--num-terations`.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Text Classifier
+
+            - Train and use a log-linear SPAM classifier using maximum likelihood estimation.
+            - We'll use a heavily processed copy of the Enron email dataset from here:
+              - <http://www.aueb.gr/users/ion/data/enron-spam/>
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Log-linear Classifier
+
+            - Train the classifier:
+            ```
+            exercises/spam-classifier train
+            ```
+            - It runs this long command:
+            ```
+            bin/fac classify \ 
+              --write-vocabulary data/out/classifier/vocab \ 
+              --write-classifier data/out/classifier/enron_email \ 
+              --training-portion 0.8 \ 
+              --validation-portion 0.2 \ 
+              --trainer "new NaiveBayes" \ 
+              --read-text-encoding ISO-8859-1 \ 
+              --read-text-dirs data/enron_spam_ham/spam data/enron_spam_ham/ham
             ```
           </script>
         </section>
@@ -555,10 +611,97 @@ object BookInfoGain {
           <script type="text/template">
             ## Log-linear Classifier
 
-            - Train a log-linear classifier using maximum likelihood estimation:
+            - Run the classifier on a random sample of 10% of the emails (copied to the `unclassified` directory):
             ```
-            bin/fac classify --read-text-dirs dir1 dir2 --write-classifier mymodel.factorie
+            exercises/spam-classifier classify
             ```
+            - It runs this long command:
+            ```
+            bin/fac classify \ 
+              --read-vocabulary data/out/classifier/vocab \ 
+              --read-classifier data/out/classifier/enron_email \ 
+              --write-classifications data/out/classification_results.txt \ 
+              --read-text-encoding ISO-8859-1 \ 
+              --read-text-dirs data/enron_spam_ham/unclassified
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Bunch o' Classifier Trainers
+
+            - Linear-Vector, Multiclass, and Decision Trees
+            - Online and Batch
+            - See `src/main/scala/cc/factorie/app/classify` in the FACTORIE Git repo.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Linear Vector Classifier (1/4)
+
+            - `LinearVectorClassifierTrainer`: A "parent class" of other linear-vector classifier trainers:
+              - `OptimizingLinearVectorClassifierTrainer`: Uses the `cc.factorie.optimize` package to estimate parameters.
+                - `OnlineOptimizingLinearVectorClassifierTrainer`: Pre-tuned with default arguments well-suited to online training, operating on the gradient of one Example at a time. 
+                - ...
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Linear Vector Classifier (2/4)
+
+            - `LinearVectorClassifierTrainer`: A "parent class" of other linear-vector classifier trainers:
+              - `OptimizingLinearVectorClassifierTrainer`: Uses the `cc.factorie.optimize` package to estimate parameters.              
+                - ...
+                - `BatchOptimizingLinearVectorClassifierTrainer`: Pre-tuned with default arguments well-suited to batch training, operating on all the gradients of the Examples together.
+                - ...
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Linear Vector Classifier (3/4)
+
+            - `LinearVectorClassifierTrainer`: A "parent class" of other linear-vector classifier trainers:
+              - `OptimizingLinearVectorClassifierTrainer`: Uses the `cc.factorie.optimize` package to estimate parameters.
+                - ...
+                - `SVMLinearVectorClassifierTrainer`: Pre-tuned with default arguments well-suited to training an L2-regularized linear SVM.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Linear Vector Classifier (4/4)
+
+            - `LinearVectorClassifierTrainer`: A "parent class" of other linear-vector classifier trainers:
+              - ... 
+              - `NaiveBayesClassifierTrainer`: A `LinearVectorClassifierTrainer` that, contrary to tradition, does not include a "bias" weight $P(class)$; it only includes the feature weights, $P(feature|class)$.
+                - What the exercise uses by default.
+
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Multiclass
+
+            - `MulticlassClassifierTrainer`: Parent class
+              - `BoostingMulticlassTrainer` - Works with N other `MulticlassClassifierTrainer`'s.
+              - `OnlineLinearMulticlassTrainer`
+              - `RandomForestMulticlassTrainer`
+              - `DecisionTreeMulticlassTrainer`
+              - `SVMMulticlassTrainer`
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Decision Trees 
+
+            - `DecisionTreeClassifier`: parent class.
+              - `ID3DecisionTreeClassifier`
           </script>
         </section>
 
