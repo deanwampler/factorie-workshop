@@ -1,7 +1,9 @@
 **/.DS_Store
 *.pdf
+*.ppt
 **/*.class
 
 project/project
 project/target
 target
+data/out
