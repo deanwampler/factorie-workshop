@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Adapted from the FACTORIE bin/fac shell script, with a few options not in
-# that script, like "classify"
+# that script, like "classify"!
 
 bindir=$(dirname $0)
 projectdir=$(dirname $bindir)

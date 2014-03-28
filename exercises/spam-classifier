@@ -1,8 +1,13 @@
 
-# usage:  spam-classifier train | classify
+# usage: 
+#   spam-classifier -h | --help 
+#   spam-classifier (train | classify) directory [factorie_options]
 # where:
-#   train     Train the classifier
-#   classify  Classify some text with the trained classifier.
+#   -h | --help       Print help on the available options.
+#   train directory      Train the classifier using emails in "directory"
+#   classify directory   Classify emails with the trained classifier.
+#   factorie_options     Other FACTORIE options, if any.
+# The files can be 
 
 dir=$(dirname $0)
 root=$(dirname $dir)
@@ -11,22 +16,32 @@ mkdir -p $data/out/classifier
 
 which_one=$1
 case $which_one in
+  
+  -h | --help)
+    args=("--help")
+    ;;
+
   train)
-    args=("--write-vocabulary" "$data/out/classifier/vocab" 
+    args=(
+      "--write-vocabulary" "$data/out/classifier/vocab" 
       "--write-classifier" "$data/out/classifier/enron_email"
       "--training-portion" "0.8"
       "--validation-portion" "0.1"
-      "--trainer" "new SVMMulticlassTrainer" # "new NaiveBayes" #"new NaiveBayesClassifierTrainer"
+      "--trainer" "new cc.factorie.app.classify.backend.SVMMulticlassTrainer" # "new NaiveBayes" #"new NaiveBayesClassifierTrainer"
+      "--print-infogain" "true"
       "--read-text-encoding" "ISO-8859-1"
-      "--read-text-dirs" "$data/enron_spam_ham/spam" "$data/enron_spam_ham/ham")
+      "--read-text-dirs" "$data/enron_spam_ham/spam $data/enron_spam_ham/ham")
     ;;
+  
   classify)
-    args=("--read-vocabulary" "$data/out/classifier/vocab" 
+    args=(
+      "--read-vocabulary" "$data/out/classifier/vocab" 
       "--read-classifier" "$data/out/classifier/enron_email"
-      "--write-classifications" "$data/out/classifier/results.txt"
       "--read-text-encoding" "ISO-8859-1"
-      "--read-text-dirs" "$data/enron_spam_ham/unclassified")
+      "--write-classifications" "$data/out/classifier/results.txt"
+      "--read-text-dirs" "$data/unclassified/spam $data/unclassified/ham")
     ;;
+  
   *)
     echo "Unrecognized command: $1. Must be 'train' or 'classify'."
     exit 1

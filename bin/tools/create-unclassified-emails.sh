@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Used to extract 10% of the Enron emails for "reclassifying"
+# Used to extract 10% of the Enron emails for "reclassifying".
 
 dir=$(dirname $0)
 root=$(dirname $dir)
