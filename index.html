@@ -122,34 +122,48 @@
           </script>
         </section>
 
-        <section data-markdown>
-          <script type="text/template">
-            ## Probability of X Given Y
-            
-            - $P(Sprinkler|Rain) = 0.01$
-            - $P(\neg Sprinkler|Rain) = 0.99$
-            - 
-            - $P(Sprinkler|\neg Rain) = 0.4$
-            - $P(\neg Sprinkler|\neg Rain) = 0.6$
-          </script>
+        <section>
+          <h2>Probability of X Given Y</h2>
+          <p>
+          <ul>
+            <li>$P(Sprinkler|Rain) = 0.01$</li>
+            <li>$P(\neg Sprinkler|Rain) = 0.99$</li>
+          </ul>
+          </p><br/>
+          <p>
+          <ul>
+            <li>$P(Sprinkler|\neg Rain) = 0.4$</li>
+            <li>$P(\neg Sprinkler|\neg Rain) = 0.6$</li>
+          </ul>
+          </p>
         </section>
 
-        <section data-markdown>
-          <script type="text/template">
-            ## Probability of X given Y and Z
-
-            - $P(Wet|Sprinkler, Rain) = 0.99$
-            - $P(\neg Wet|Sprinkler, Rain) = 0.01$
-            - 
-            - $P(Wet|\neg Sprinkler, Rain) = 0.80$
-            - $P(\neg Wet|\neg Sprinkler, Rain) = 0.20$
-            - 
-            - $P(Wet|Sprinkler, \neg Rain) = 0.90$
-            - $P(\neg Wet|Sprinkler, \neg Rain) = 0.10$
-            - 
-            - $P(Wet|\neg Sprinkler, \neg Rain) = 0.0$
-            - $P(\neg Wet|\neg Sprinkler, \neg Rain) = 1.0$
-          </script>
+        <section>
+          <h2>Probability of X given Y and Z</h2>
+          <p>
+          <ul>
+            <li>$P(Wet|Sprinkler, Rain) = 0.99$</li>
+            <li>$P(\neg Wet|Sprinkler, Rain) = 0.01$</li>
+          </ul>
+          </p><br/>
+          <p>
+          <ul>
+            <li>$P(Wet|\neg Sprinkler, Rain) = 0.80$</li>
+            <li>$P(\neg Wet|\neg Sprinkler, Rain) = 0.20$</li>
+          </ul>
+          </p><br/>
+          <p>
+          <ul>
+            <li>$P(Wet|Sprinkler, \neg Rain) = 0.90$</li>
+            <li>$P(\neg Wet|Sprinkler, \neg Rain) = 0.10$</li>
+          </ul>
+          </p><br/>
+          <p>
+          <ul>
+            <li>$P(Wet|\neg Sprinkler, \neg Rain) = 0.0$</li>
+            <li>$P(\neg Wet|\neg Sprinkler, \neg Rain) = 1.0$</li>
+          </ul>
+          </p>
         </section>
 
         <section data-markdown>
@@ -280,30 +294,41 @@
           </script>
         </section>
 
-        <section data-markdown>
-          <script type="text/template">
-            ## Factor Graphs
+        <section>
+          <h1>Factor Graphs</h1>
             
-            ![Example Factor Graph](images/FactorGraph.png)
-            <small>From <http://en.wikipedia.org/wiki/File:Factorgraph.jpg></small>
-          </script>
+          <img alt="Example Factor Graph" src="images/FactorGraph.png" width=450 /><br/>
+          <small>From <a href="http://en.wikipedia.org/wiki/File:Factorgraph.jpg">en.wikipedia.org/wiki/File:Factorgraph.jpg</a></small>
         </section>
 
         <section>
           <h2>Factor Graphs</h2>
-          <ul>
-            <li><em>Factored</em> function: $g(X_{1}, X_{2}, ..., X_{n}) = \prod\limits_{j=1}^{m} f_{j}(S_{j})$</li>
-            <li>where $S_{j} \subseteq {X_{1}, X_{2}, ..., X_{n}}$</li>
-            <li>Forms a <em>bipartite</em> graph</li>
-          </ul>
-          <img alt="Example Factor Graph" src="images/FactorGraph2.png" height="250"/>
+          <table>
+            <tr>
+              <td>
+                <ul>
+                  <li><em>Factored</em> function, i.e., <em>joint probability distribution</em>: $g(X_{1}, X_{2}, ..., X_{n}) = \frac{1}{Z} \prod\limits_{j=1}^{m} f_{j}(S_{j})$</li>
+                  <li>where
+                    <ul>
+                      <li>$S_{j} \subseteq {X_{1}, X_{2}, ..., X_{n}}$</li>
+                      <li>$Z$ is a normalization constant (we'll assume $Z = 1$)</li>
+                    </ul>
+                  </li>
+                  <li>Forms a <em>bipartite</em> graph</li>
+                </ul>
+              </td>
+              <td width="150">
+                <img alt="Example Factor Graph" src="images/FactorGraph2.png" height="250"/>
+              </td>
+            </tr>
+          </table>
         </section>
 
         <section>
           <ul>
             <li>$g(X_{1}, X_{2}, X_{3}) = f_{1}(X_{1})f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})f_{4}(X_{2},X_{3})$</li>
           </ul>
-          <img alt="Example Factor Graph" src="images/FactorGraph.png" height="400"/>
+          <img alt="Example Factor Graph" src="images/FactorGraph.png" height="350"/>
           <ul>
             <li>Note that $f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})$ form a <em>cycle</em>.
         </section>
@@ -318,9 +343,10 @@
 
         <section data-markdown>
           <script type="text/template">
-            ## Factor Graphs
-
-            Provide efficient computation of *marginal distributions* in Bayesian Networks using the *sum-product message-passing algorithm* (a.k.a. *belief propagation*: calculation of the marginal distribution for unobserved nodes,conditional on observed nodes.)
+            ## *Factor Graphs and*
+            ## *the Sum-Product Algorithm*
+            - Frank R. Kschischang, Brendan J. Frey, Hans-Andrea Loeliger, *IEEE Transactions On Information Theory*, Vol. 47, No. 2, February 2001. 
+              - <http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.54.1570>
           </script>
         </section>
 
@@ -328,7 +354,32 @@
           <script type="text/template">
             ## Factor Graphs
 
-            - Bayesian Networks and Markov Networks can be represented as Factor Graphs, providing efficient belief propagation.
+            - Can represent directed (e.g., Bayesian) and undirected (e.g., Markov) graphs.
+            - "Factors" expensive, multivariable function into smaller functions.
+            - Provides efficient computation of *marginal distributions* using the *sum-product message-passing algorithm* (i.e. *belief propagation*: calculation of the marginal distribution for unobserved nodes,conditional on observed nodes.)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+          ## Bayes Network to Factor Graph
+            
+          ![A Bayes Network as a Factor Graph](images/Bayes-to-FG.png)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+          ## Markov Network to Factor Graph
+            
+          ![A Markov Network as a Factor Graph](images/Markov-to-FG.png)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Factor Graphs
+
             - But if you need a *generative model* (where you need to generate data points of any values of $X_{i}$, not marginalize over some of them), Bayesian Networks work best.
           </script>
         </section>
@@ -343,9 +394,9 @@
 
         <section data-markdown>
           <script type="text/template">
-            ## What Are Relational Factor Graphs?
+            ## Relational Factor Graphs?
 
-            - TODO
+            - <http://courses.cs.washington.edu/courses/cse574/05sp/slides/rfg-lin.ppt>
           </script>
         </section>
 
@@ -430,7 +481,8 @@
             ```
             - Train a log-linear classifier using maximum likelihood estimation:
             ```
-            bin/fac classify --read-text-dirs dir1 dir2 --write-classifier mymodel.factorie
+            bin/fac classify --read-text-dirs dir1 dir2 \ 
+              --write-classifier mymodel.factorie
             ```
           </script>
         </section>
@@ -533,7 +585,8 @@ object BookInfoGain {
 
             - LDA with Gibbs Sampling, 100 Iterations:
             ```
-            bin/fac lda --read-dirs data/shakespeare --num-topics 20 --num-iterations 100 
+            bin/fac lda --read-dirs data/shakespeare \ 
+              --num-topics 20 --num-iterations 100 
             ```
           </script>
         </section>
@@ -546,7 +599,8 @@ object BookInfoGain {
               - <http://www.cs.cmu.edu/~./enron/>
             - LDA with Gibbs Sampling, 100 Iterations:
             ```
-            bin/fac lda --read-dirs data/shakespeare --num-topics 20 --num-iterations 100 
+            bin/fac lda --read-dirs data/shakespeare \ 
+              --num-topics 20 --num-iterations 100 
             ```
           </script>
         </section>
@@ -557,7 +611,8 @@ object BookInfoGain {
 
             - Train a log-linear classifier using maximum likelihood estimation:
             ```
-            bin/fac classify --read-text-dirs dir1 dir2 --write-classifier mymodel.factorie
+            bin/fac classify --read-text-dirs dir1 dir2 \ 
+              --write-classifier mymodel.factorie
             ```
           </script>
         </section>

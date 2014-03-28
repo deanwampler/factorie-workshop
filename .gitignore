@@ -1,0 +1,7 @@
+**/.DS_Store
+*.pdf
+**/*.class
+
+project/project
+project/target
+target
