@@ -764,11 +764,176 @@ object BookInfoGain {
 
         <section data-markdown>
           <script type="text/template">
+            # The FACTORIE API
+
+            - Let's do a few exercises to explore the API.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Univariate and Multivariate Gaussian Models
+
+            - `src/main/scala/workshop/exercises/ex01/GaussianDemo.scala`:
+            <br/>
+            Create a model for holding factors connected to 1000 random variables based on samples from a Gaussian. Then use _maximum likelihood estimation_ to re-estimate the mean and variance from the sampled data.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Univariate and Multivariate Gaussian Models
+
+            - Start `sbt`:
+            ```
+            > run
+            [1] workshop.exercises.ex01.GaussianDemo
+            [2] workshop.exercises.ex01.MultivariateGaussianDemo
+            ...
+            > 1
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Univariate and Multivariate Gaussian Models
+
+            - Invoke `run` again, select `2`.
+            - Try this variant of `run`:
+            ```
+            > run-main workshop.exercises.ex01.MultivariateGaussianDemo 2
+            ```
+            - We passed the argument `2`, so it uses a 2-dim. model.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Univariate and Multivariate Gaussian Models
+
+            ... Code Walkthrough ...
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Word Segmenter
+
+            - `src/main/scala/workshop/exercises/ex02/WordSegmenterDemo.scala`:
+            <br/>
+            Train a word segementer based on the observed relations of one character to those that come before and after it, as well as those at the start of a sentence and a word.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Word Segmenter
+
+            - Start `sbt`:
+            ```
+            > run
+            [1] workshop.exercises.ex01.GaussianDemo
+            [2] workshop.exercises.ex01.MultivariateGaussianDemo
+            [3] workshop.exercises.ex02.WordSegmenterDemo
+            ...
+            > 3
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Word Segmenter
+
+            ... Code Walkthrough ...
+          </script>
+        </section>
+
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Linear-chain Conditional Random Fields
+
+            - For parts-of-speech tagging.
+            - `src/main/scala/workshop/exercises/ex03/LinearChainCRFDemo.scala`:
+            <br/>
+            Declare sample data, model, inference and learning for a linear-chain CRF for part-of-speech tagging.
+          </script>
+        </section>
+
+
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Linear-chain Conditional Random Fields
+
+            - Start `sbt`:
+            ```
+            > run
+            [1] workshop.exercises.ex01.GaussianDemo
+            [2] workshop.exercises.ex01.MultivariateGaussianDemo
+            [2] workshop.exercises.ex02.WordSegmenterDemo
+            [4] ExampleLinearChainCRFDemo
+            ...
+            > 4
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Linear-chain Conditional Random Fields
+
+            ... Code Walkthrough ...
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            # Conclusions
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## FACTORIE Pros
+
+            - Factor Graphs.
+            - State of the art belief propagation and other algorithms.
+            - Excellent performance.
+            - Scalable to concurrent processing.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## FACTORIE Cons
+
+            - Too advanced for novice Machine Learning users. 
+            - Spare documentation.
+            - Non-idiomatic Scala.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Recommendations
+
+            - Learn about Factor Graphs (see next slide).
+            - Learn Scala (because lots of Big Data tools use it).
+            - If you have basic ML needs, look elsewhere...
+              - ... but keep FACTORIE in mind!
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
             ## Resources - Factor Graphs
 
-            - [IEEE Signal Processing, Jan. 2004](http://www.robots.ox.ac.uk/~parg/mlrg/papers/factorgraphs.pdf) (PDF).
             - [Introduction to Factor Graphs](http://people.binf.ku.dk/~thamelry/MLSB08/hal.pdf) (PDF).
             - [Relational Factor Graphs](http://courses.cs.washington.edu/courses/cse574/05sp/slides/rfg-lin.ppt) (PPT).
+            - [IEEE Signal Processing, Jan. 2004](http://www.robots.ox.ac.uk/~parg/mlrg/papers/factorgraphs.pdf) (PDF).
           </script>
         </section>
 
