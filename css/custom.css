@@ -23,3 +23,11 @@ img {
   border-width: 1px;
   border-color: grey;
 }
+
+.reveal dl, .reveal dt {
+  text-align: left !important;
+}
+
+.reveal dd {
+  padding-left: 50px;
+}

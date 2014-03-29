@@ -54,6 +54,24 @@
             It provides a succinct language for creating _relational factor graphs_, estimating parameters, and performing inference.
           </script>
         </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Dean Wampler
+
+            - Consultant at [Typesafe](http://typesafe.com)
+            - Big Data and Internet of Things Enthusiast.
+            - Other expertise: Functional Programming, Scala, *Reactive* Applications.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Dean Wampler
+
+            ![Programming Hive](images/prog_hive_cover.png) ![Programming Scala 2nd Edition](images/prog_scala_2ed_cover.jpg) ![FP in Java](images/FPforJavaDevsCover.png)
+          </script>
+        </section>
         
         <section data-markdown>
           <script type="text/template">
@@ -64,7 +82,6 @@
             - Total world domination!! <!-- .element: class="fragment" data-fragment-index="3" -->
           </script>
         </section>
-
 
         <section data-markdown>
           <script type="text/template">
@@ -170,7 +187,7 @@
           <script type="text/template">
             ## Joint Probability Function
 
-            - Prob. that it is web, the sprinkler is on and it's raining:
+            - Prob. that it is wet, the sprinkler is on and it's raining:
              
              $P(W,S,R) = P(W|S,R)P(S|R)P(R)$
             
@@ -179,42 +196,29 @@
 
         <section>
             <h2>Probability the Grass is Wet?</h2>
-            <ul>
-            <li>
-            $P(Wet) = \sum\limits_{s = Sprinkler,r = Rain} P(Wet|s, r)P(s|r)P(r)$
-            </li>
-            <li>
-            $P(Wet) = P(T_{W}|F_{S},F_{R})P(F_{S}|F_{R})P(F_{R}) + $<br/>$P(T_{W}|T_{S},F_{R})P(T_{S}|F_{R})P(F_{R}) + $<br/>$P(T_{W}|F_{S},T_{R})P(F_{S}|T_{R})P(T_{R}) + $<br/>$P(T_{W}|T_{S},T_{R})P(T_{S}|T_{R})P(T_{R})$
-            </li>
-            <li>
-            $P(Wet) = 0.0 + 0.9*0.4*0.8 + $<br/>$0.8*0.99*0.2 + 0.99*0.01*0.20$
-            </li>
-            <li>
-            $P(Wet) = 0.0 + 0.288 + 0.158 + 0.002$
-            </li>
-            <li>
-            $P(Wet) = 0.448$
-            </li>
-            </ul>
+            <dl>
+              <dt>$P(Wet) = \sum\limits_{s = S,r = R} P(Wet|s, r)P(s|r)P(r)$</dt>
+              <dt>$P(Wet) = P(W|\neg S,\neg R)P(\neg S|\neg R)P(\neg R) + $</dt>
+              <dd>$P(W|S,\neg R)P(S|\neg R)P(\neg R) + $</dd>
+              <dd>$P(W|\neg S,R)P(\neg S|R)P(R) + $</dd>
+              <dd>$P(W|S,R)P(S|R)P(R)$</dd>
+              <dt>$P(Wet) = 0.0 + 0.9*0.4*0.8 + $</dt>
+              <dd>$0.8*0.99*0.2 + 0.99*0.01*0.20$</dd>
+              <dt>$P(Wet) = 0.0 + 0.288 + 0.158 + 0.002$</dt>
+              <dt>$P(Wet) = 0.448$</dt>
+            </dl>
         </section>
 
         <section>
-            <h2>Probability the Grass is Wet and It Hasn't Rained?</h2>
-            <ul>
-            <li>
-            $P(Wet|\neg R) = \sum\limits_{s = Sprinkler} P(Wet|s, \neg R)P(s|\neg R)P(\neg R)$
-            </li>
-            <li>But, $P(\neg R)$ is now $1.0$:
-            <li>
-            $P(Wet|\neg R) = P(T_{W}|F_{S},F_{R})P(F_{S}|F_{R}) + $<br/>$P(T_{W}|T_{S},F_{R})P(T_{S}|F_{R})$
-            </li>
-            <li>
-            $P(Wet|\neg R) = 0.0 + 0.9*0.4$
-            </li>
-            <li>
-            $P(Wet|\neg R) = 0.360$
-            </li>
-            </ul>
+            <h2>Prob. the Grass is Wet, No Rain?</h2>
+            <dl>
+              <dt>$P(Wet|\neg R) = \sum\limits_{s = S} P(Wet|s, \neg R)P(s|\neg R)P(\neg R)$</dt>
+              <dt>But, $P(\neg R)$ is now $1.0$:</dt>
+              <dt>$P(Wet|\neg R) = P(W|\neg S,\neg R)P(\neg S|\neg R) + $</dt>
+              <dd>$P(W|S,\neg R)P(S|\neg R)$</dd>
+              <dt>$P(Wet|\neg R) = 0.0 + 0.9*0.4$</dt>
+              <dt>$P(Wet|\neg R) = 0.360$</dt>
+            </dl>
         </section>
 
         <section data-markdown>
@@ -230,9 +234,10 @@
 
         <section data-markdown>
           <script type="text/template">
-            ## Disadvantages of Bayesian Networks
+            ## Poor Fits for Bayesian Networks
 
             - Pairwise dependencies that introduce cycles.
+            - Time-series or other "streams" of data.
           </script>
         </section>
 
@@ -325,20 +330,34 @@
         </section>
 
         <section>
-          <ul>
-            <li>$g(X_{1}, X_{2}, X_{3}) = f_{1}(X_{1})f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})f_{4}(X_{2},X_{3})$</li>
-          </ul>
-          <img alt="Example Factor Graph" src="images/FactorGraph.png" height="350"/>
-          <ul>
-            <li>Note that $f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})$ form a <em>cycle</em>.
+          <p>$g(X_{1}, X_{2}, X_{3}) = f_{1}(X_{1})f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})f_{4}(X_{2},X_{3})$</p>
+          <p><img alt="Example Factor Graph" src="images/FactorGraph.png" height="350"/></p>
+          <p>Note that $f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})$ form a <em>cycle</em>.</p>
         </section>
-
 
         <section>
           <h2>Compute the Marginal of Variable $X_{k}$</h2>
-          <ul>
-            <li>$g_{k}(X_{k}) = \sum\limits_{i=1, i \neq k}^{n} g(X_{1},X_{2},...,X_{n})$</li>
-          </ul>
+          <dl>
+            <dt>The <em>Sum-Product Algorithm:</em></dt>
+            <dd>$g_{k}(X_{k}) = \sum\limits_{i=1, i \neq k}^{n} g(X_{1},X_{2},...,X_{n})$</dd>
+            <dt>Using our Example:</dt>
+            <dd>$g_{1}(X_{1}) = f_{1}(X_{1}) \sum\limits_{2,3} f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})f_{4}(X_{2},X_{3})$</dd>
+          </dl>
+        </section>
+
+        <section>
+          <h2>Compute the Marginal of Variable $X_{k}$</h2>
+          <dl>
+          <dt>Compute $g_{1}(X_{1})$, assume $X_{i}$ are boolean, $i = 1 - 3$:</dt>
+          <dt>
+            $g_{1}(X_{1}) = f_{1}(X_{1}) \sum\limits_{2,3} f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})f_{4}(X_{2},X_{3})$
+          </dd>
+          <dt>$g_{1}(X_{1}) = f_{1}(X_{1}) ($</dt>
+          <dd>$f_{\neg 2}(X_{1},X_{\neg 3})f_{\neg 3}(X_{1},X_{\neg 2})f_{4}(X_{\neg 2},X_{\neg 3}) + $</dd>
+          <dd>$f_{\neg 2}(X_{1},X_{3})f_{3}(X_{1},X_{\neg 2})f_{4}(X_{\neg 2},X_{3}) + $</dd>
+          <dd>$f_{2}(X_{1},X_{\neg 3})f_{\neg 3}(X_{1},X_{2})f_{4}(X_{2},X_{\neg 3}) + $</dd>
+          <dd>$f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})f_{4}(X_{2},X_{3}))$</dd>
+          </dl>
         </section>
 
         <section data-markdown>
@@ -354,9 +373,9 @@
           <script type="text/template">
             ## Factor Graphs
 
-            - Can represent directed (e.g., Bayesian) and undirected (e.g., Markov) graphs.
+            - Unifies directed (e.g., Bayesian) and undirected (e.g., Markov) graphs.
             - "Factors" expensive, multivariable function into smaller functions.
-            - Provides efficient computation of *marginal distributions* using the *sum-product message-passing algorithm* (i.e. *belief propagation*: calculation of the marginal distribution for unobserved nodes,conditional on observed nodes.)
+            - Provides efficient computation of *marginal distributions* using the *sum-product message-passing algorithm* (i.e. *belief propagation*: calculation of the marginal distribution for unobserved nodes, conditioned on observed nodes.)
           </script>
         </section>
 
@@ -365,6 +384,7 @@
           ## Bayes Network to Factor Graph
             
           ![A Bayes Network as a Factor Graph](images/Bayes-to-FG.png)
+          <small>Adapted from [Relational Factor Graphs](http://courses.cs.washington.edu/courses/cse574/05sp/slides/rfg-lin.ppt) (PPT).</small>
           </script>
         </section>
 
@@ -373,12 +393,13 @@
           ## Markov Network to Factor Graph
             
           ![A Markov Network as a Factor Graph](images/Markov-to-FG.png)
+          <small>Adapted from [Relational Factor Graphs](http://courses.cs.washington.edu/courses/cse574/05sp/slides/rfg-lin.ppt) (PPT).</small>
           </script>
         </section>
 
         <section data-markdown>
           <script type="text/template">
-            ## Factor Graphs
+            ## Factor Graphs for Generative Models?
 
             - But if you need a *generative model* (where you need to generate data points of any values of $X_{i}$, not marginalize over some of them), Bayesian Networks work best.
           </script>
@@ -389,14 +410,6 @@
             ## Factor Graphs: Examples
 
             - *Turbo code* - Error correction algos that are so efficient, they enable near-optimal capacity in communication channels.
-          </script>
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
-            ## Relational Factor Graphs?
-
-            - <http://courses.cs.washington.edu/courses/cse574/05sp/slides/rfg-lin.ppt>
           </script>
         </section>
 
@@ -418,11 +431,11 @@
 
         <section data-markdown>
           <script type="text/template">
-            ## FACTORIE Facts 
+            ## FACTORIE "Facts" 
 
             - Developed by a team at [U. Mass](http://factorie.cs.umass.edu/index.html).
             - Written in and uses [Scala](http://scala-lang.org) as the programming language.
-            - Directed and undirected prob. graphical models.
+            - Directed and undirected *Probabilistic Graphical Models*.
             - Designed for prototyping to large-scale deployments.
             - Designed for easy novice use, with progressively-deeper capabilities.
 
@@ -431,7 +444,7 @@
 
         <section data-markdown>
           <script type="text/template">
-            ## FACTORIE Facts 
+            ## FACTORIE "Facts" 
 
             - Built-in support for:
               - Random variables and factors
@@ -448,9 +461,9 @@
             - Classification
               - Incl. document classification with MaxEnt, NaiveBayes, SVMs and Decision Trees.
             - Linear Regression
-            - linear-chain Conditional Random Fields
+            - Linear-chain Conditional Random Fields
             - Topic Modeling 
-              - Incl. Latent Dirichlet Allocation and variants.
+              - e.g., Latent Dirichlet Allocation (LDA).
           </script>
         </section>
 
@@ -459,15 +472,19 @@
             ## FACTORIE Pre-built Models and Tools  
 
             - Natural Language Processing
-              - Incl.pipeline components lie tokenization, sentence segmentation, part-of-speech tagging, named entity recognition, dependency parsing and within-document coreference.
+              - Including pipeline components like tokenization, sentence segmentation, part-of-speech tagging, named entity recognition, dependency parsing, and within-document coreference.
           </script>
         </section>
 
         <section data-markdown>
           <script type="text/template">
-            ## About FACTORIE 
+            ## Learning FACTORIE 
 
-            - See [FACTORIE UserGuide - Introduction](http://factorie.cs.umass.edu/tutorials/UsersGuide01Introduction.scala.html) for a detailed list of strengths, weaknesses, and features supported.
+            - Start with the [FACTORIE UserGuide - Introduction](http://factorie.cs.umass.edu/tutorials/UsersGuide01Introduction.scala.html).
+              - High-level discussion of concepts.
+              - Examples using built-in features.
+              - Includes a detailed list of strengths, weaknesses, and features supported.
+            - To learn the API, see the [FACTORIE Tutorial](http://factorie.cs.umass.edu/tutorial.html).
           </script>
         </section>
 
@@ -475,7 +492,7 @@
           <script type="text/template">
             ## Simple Command-line Examples 
 
-            - LDA with Gibbs Sampling, 100 Iterations:
+            - Find Topics Using LDA with Gibbs Sampling, 100 Iterations:
             ```
             bin/fac lda --read-dirs mytextdir --num-topics 20 --num-iterations 100 
             ```
@@ -934,6 +951,7 @@ object BookInfoGain {
             - [Introduction to Factor Graphs](http://people.binf.ku.dk/~thamelry/MLSB08/hal.pdf) (PDF).
             - [Relational Factor Graphs](http://courses.cs.washington.edu/courses/cse574/05sp/slides/rfg-lin.ppt) (PPT).
             - [IEEE Signal Processing, Jan. 2004](http://www.robots.ox.ac.uk/~parg/mlrg/papers/factorgraphs.pdf) (PDF).
+            - [Factor Graphs and the Sum-Product Algorithm](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.54.1570), Frank R. Kschischang, Brendan J. Frey, Hans-Andrea Loeliger, *IEEE Transactions On Information Theory*, Vol. 47, No. 2, February 2001. 
           </script>
         </section>
 
