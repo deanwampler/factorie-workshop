@@ -29,9 +29,21 @@ git clone https://github.com/deanwampler/factorie-workshop
 
 As an alternative, on the [workshop page](https://github.com/deanwampler/factorie-workshop), in the column on the right-hand side of the page is a button labeled *Clone in Desktop*, that helps you clone the repo for use in the *GitHub Desktop* app. 
 
-### Download a Zip of the Repo
+#### Download a Zip of the Repo
 
 On the [workshop page](https://github.com/deanwampler/factorie-workshop), in the column on the right-hand side of the page is button labeled *Download ZIP*. Download the zip file and expand it somewhere convenient.
+
+### Setup the `data` Directory
+
+Because of the size of the dataset used for the exercises, a compressed Zip file is provided, which you need to expand. In the root directory for the workshop, you should find the following file, `factorie-workshop-data.zip`.
+
+Unzip that file in this directory. It will create a new directory named `data`. On *nix-like machines, you can run the `zip` command from the shell:
+
+```shell
+unzip factorie-workshop-data.zip
+```
+
+On Windows, use any tool for expanding Zip files. Make sure the output `data` directory goes into the root directory for the workshop.
 
 ### Run `sbt` to Setup the Workshop
 
@@ -51,15 +63,15 @@ For Windows:
 .\sbt
 ```
 
-AFter some information messages, you'll see this prompt:
+After some information messages, you'll see this prompt:
 
 ```
 FactorieWorkshop (master) 0.1>
 ```
 
-It show the name of the workshop's `sbt` "project" (`FactorieWorkshop`), the git branch (`master`), and the workshop version (`0.1`).
+It shows the name of the workshop's `sbt` "project" (`FactorieWorkshop`), the git branch (`master`), and the workshop version (`0.1`).
 
-After the prompt, type `help`, to see brief information about `sbt` commands, then the `update` command. You'll need to be connected to the internet for `update`, as it will find and download the software we need, such as a pre-built version of FACTORIE.
+After the prompt, type `help`, to see brief information about `sbt` commands, then the `update` command. You'll need to be connected to the Internet for `update`, as it will find and download the software we need, such as a pre-built version of FACTORIE.
 
 The `update` task may take several minutes. It should finish with a "success" message like this:
 
@@ -74,7 +86,9 @@ To exit `sbt`, type `quit` at the prompt.
 
 ### Setting Up FACTORIE
 
-Follow the instructions here: [factorie.cs.umass.edu/installation.html](http://factorie.cs.umass.edu/installation.html). They tell you what you need to install and how to install it.
+Setting up FACTORIE itself is not strictly necessary, as the previous steps downloaded a pre-built version that we'll use. However, it is useful for browsing the FACTORIE source code (which I found necessary when debugging the exercises) and if you decide to use FACTORIE after this workshop. So, this section is optional.
+
+Follow the instructions here for getting the source code from GitHub: [factorie.cs.umass.edu/installation.html](http://factorie.cs.umass.edu/installation.html). The instructions also provide links to pre-built versions.
 
 After following the steps to clone the code from GitHub and after you have "checked out" (switched to) the `factorie-1.0.0-RC1` branch, run the following commands from a command prompt to complete the setup. If you are on Windows, change the `/` to `\`:
 
@@ -91,7 +105,7 @@ This starts the Scala build tool, SBT, in an interpreter mode.  At the SBT promp
 
 The `compile` command will download additional dependent libraries and compile FACTORIE. The `test` command runs through the automated tests, which should complete with reporting errors.
 
-> **NOTE:** If you run into problems compiling or testing FACTORIE, don't worry. We'll use a prebuilt version in the workshop.
+> **NOTE:** If you run into problems compiling or testing FACTORIE, don't worry. We'll use the prebuilt version in the workshop.
 
 If the code compiled successfully (whether or not the tests executed successfully), let's do one final test to make sure everything is ready to go. Type the following command:
 
@@ -124,16 +138,15 @@ Now you're ready for the workshop. If you're impatient to learn more, look at th
 
 The workshop was written in [reveal.js](http://lab.hakim.se/reveal-js/).
 
-## License
+## Licenses
 
-This presentation Unless otherwise noted, all are covered by the [Creative Commons License](http://creativecommons.org/licenses/by/3.0/).
- and reveal.js are both MIT licensed. FACTORIE is Apache 2.0 licensed.
-
-The presentation notes: Copyright (C) 2014 Dean Wampler, http://polyglotprogramming.com. 
+This presentation, including the exercises, is Copyright (C) 2014 Dean Wampler, http://polyglotprogramming.com, unless otherwise noted, under the [Creative Commons License](http://creativecommons.org/licenses/by/3.0/).
 
 FACTORIE is Copyright (C) 2008-2010 University of Massachusetts
 Amherst, Department of Computer Science, and is licensed under the
 terms of the Apache License, Version 2.0 or (at your option)
 any subsequent version.
 
-reveal.js: Copyright (C) 2013 Hakim El Hattab, http://hakim.se
+Reveal.js is Copyright (C) 2013 Hakim El Hattab, http://hakim.se under the MIT license.
+
+See the included license files.
