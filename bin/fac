@@ -8,8 +8,8 @@ projectdir=$(dirname $bindir)
 
 cp=$projectdir/src/main/resources:$projectdir/target/classes
 
-factoriejar=$(echo $projectdir/lib/factorie-*.jar)
-if [ -e $factoriejar ] ; then
+factoriejar=$(echo $projectdir/lib/factorie-1.0*.jar)
+if [[ -e $factoriejar ]] ; then
   cp=$cp:$factoriejar
 else
   echo "No FACTORIE jar found in $projectdir/lib"

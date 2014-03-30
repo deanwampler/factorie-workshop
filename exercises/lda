@@ -5,8 +5,8 @@
 #   enron        Run against the Enron email dataset.
 
 
-dir=$(dirname $0)
-root=$(dirname $dir)
+exdir=$(dirname $0)
+root=$(dirname $exdir)
 data=$root/data
 
 which_one=$1
@@ -15,7 +15,7 @@ case $which_one in
     dir=$data/shakespeare
     ;;
   enron)
-    dir=$data/enron_spam_ham/ham
+    dir=$data/enron_spam_ham/ham 
     ;;
   *)
     echo "Unrecognized data set: $1. Must be 'shakespeare' or 'enron'."
@@ -25,4 +25,4 @@ esac
 shift
 
 
-$root/bin/lda --read-dirs $dir "$@"
+$root/bin/fac lda --read-dirs "$dir" "$@"

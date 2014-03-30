@@ -494,13 +494,14 @@
 
             - Find Topics Using LDA with Gibbs Sampling, 100 Iterations:
             ```
-            bin/fac lda --read-dirs mytextdir --num-topics 20 --num-iterations 100 
+            $FACTORIE_HOME/bin/fac lda --read-dirs mytextdir --num-topics 20 --num-iterations 100 
             ```
             - Train a log-linear classifier using maximum likelihood estimation:
             ```
-            bin/fac classify --read-text-dirs dir1 dir2 \ 
+            $FACTORIE_HOME/bin/fac classify --read-text-dirs dir1 dir2 \ 
               --write-classifier myclassifier.factorie
             ```
+            - (We'll use our own version of `fac`...)
           </script>
         </section>
 
@@ -600,11 +601,15 @@ object BookInfoGain {
           <script type="text/template">
             ## LDA Example #1 - Shakespeare's plays.
 
-            - LDA with Gibbs Sampling, 10 Iterations:
+            - LDA with Gibbs Sampling, 10 Iterations, *nix command:
             ```
             exercises/lda shakespeare
             ```
-            - It runs this command:
+            - Windows `cmd` window command:
+            ```
+            exercises\lda shakespeare
+            ```
+            - It runs this command (*nix version):
             ```
             bin/fac lda --read-dirs data/shakespeare \ 
               --num-topics 20 --num-iterations 10 
@@ -642,7 +647,8 @@ object BookInfoGain {
             ```
             - It runs this command:
             ```
-            bin/fac lda --read-dirs data/enron_spam_ham \ 
+            bin/fac lda \ 
+              --read-dirs "data/enron_spam_ham/ham data/enron_spam_ham/spam" \ 
               --num-topics 20 --num-iterations 10 
             ```
             - Try other values for `--num-topics` and `--num-terations`.
@@ -685,7 +691,7 @@ object BookInfoGain {
           <script type="text/template">
             ## Log-linear Classifier
 
-            - Run the classifier on a random sample of 10% of the emails (copied to the `unclassified` directory):
+            - Run the classifier on a some SPAM and HAM emails I received personally:
             ```
             exercises/spam-classifier classify
             ```
@@ -698,6 +704,7 @@ object BookInfoGain {
               --read-text-encoding ISO-8859-1 \ 
               --read-text-dirs data/enron_spam_ham/unclassified
             ```
+            - (NOTE: There are bugs in this result, at this time...)
           </script>
         </section>
 
