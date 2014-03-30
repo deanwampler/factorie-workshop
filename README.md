@@ -37,7 +37,7 @@ On the [workshop page](https://github.com/deanwampler/factorie-workshop), in the
 
 Because of the size of the dataset used for the exercises, a compressed Zip file is provided, which you need to expand. In the root directory for the workshop, you should find the following file, `factorie-workshop-data.zip`.
 
-Unzip that file in this directory. It will create a new directory named `data`. On *nix-like machines, you can run the `zip` command from the shell:
+Unzip the file in workshop's root directory. It will create a new directory named `data`. On *nix-like machines, you can run the `zip` command from the shell:
 
 ```shell
 unzip factorie-workshop-data.zip
