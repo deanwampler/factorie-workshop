@@ -499,7 +499,7 @@
             - Train a log-linear classifier using maximum likelihood estimation:
             ```
             bin/fac classify --read-text-dirs dir1 dir2 \ 
-              --write-classifier mymodel.factorie
+              --write-classifier myclassifier.factorie
             ```
           </script>
         </section>
@@ -654,7 +654,7 @@ object BookInfoGain {
             ## Text Classifier
 
             - Train and use a log-linear SPAM classifier using maximum likelihood estimation.
-            - We'll use a heavily processed copy of the Enron email dataset from here:
+            - We'll use the same heavily processed copy of the Enron email dataset from:
               - <http://www.aueb.gr/users/ion/data/enron-spam/>
           </script>
         </section>
@@ -789,9 +789,9 @@ object BookInfoGain {
 
         <section data-markdown>
           <script type="text/template">
-            ## Univariate and Multivariate Gaussian Models
+            ## Univariate and Multivariate<br/>Gaussian Models
 
-            - `src/main/scala/workshop/exercises/ex01/GaussianDemo.scala`:
+            - `workshop/exercises/ex01/GaussianDemo.scala`:
             <br/>
             Create a model for holding factors connected to 1000 random variables based on samples from a Gaussian. Then use _maximum likelihood estimation_ to re-estimate the mean and variance from the sampled data.
           </script>
@@ -799,7 +799,7 @@ object BookInfoGain {
 
         <section data-markdown>
           <script type="text/template">
-            ## Univariate and Multivariate Gaussian Models
+            ## Univariate and Multivariate<br/>Gaussian Models
 
             - Start `sbt`:
             ```
@@ -814,7 +814,7 @@ object BookInfoGain {
 
         <section data-markdown>
           <script type="text/template">
-            ## Univariate and Multivariate Gaussian Models
+            ## Univariate and Multivariate<br/>Gaussian Models
 
             - Invoke `run` again, select `2`.
             - Try this variant of `run`:
@@ -827,7 +827,7 @@ object BookInfoGain {
 
         <section data-markdown>
           <script type="text/template">
-            ## Univariate and Multivariate Gaussian Models
+            ## Univariate and Multivariate<br/>Gaussian Models
 
             ... Code Walkthrough ...
           </script>
@@ -837,7 +837,7 @@ object BookInfoGain {
           <script type="text/template">
             ## Word Segmenter
 
-            - `src/main/scala/workshop/exercises/ex02/WordSegmenterDemo.scala`:
+            - `workshop/exercises/ex02/WordSegmenterDemo.scala`:
             <br/>
             Train a word segementer based on the observed relations of one character to those that come before and after it, as well as those at the start of a sentence and a word.
           </script>
@@ -867,30 +867,27 @@ object BookInfoGain {
           </script>
         </section>
 
-
         <section data-markdown>
           <script type="text/template">
-            ## Linear-chain Conditional Random Fields
+            ## Linear-chain Conditional<br/>Random Fields
 
             - For parts-of-speech tagging.
-            - `src/main/scala/workshop/exercises/ex03/LinearChainCRFDemo.scala`:
+            - `workshop/exercises/ex03/LinearChainCRFDemo.scala`:
             <br/>
             Declare sample data, model, inference and learning for a linear-chain CRF for part-of-speech tagging.
           </script>
         </section>
 
-
-
         <section data-markdown>
           <script type="text/template">
-            ## Linear-chain Conditional Random Fields
+            ## Linear-chain Conditional<br/>Random Fields
 
             - Start `sbt`:
             ```
             > run
             [1] workshop.exercises.ex01.GaussianDemo
             [2] workshop.exercises.ex01.MultivariateGaussianDemo
-            [2] workshop.exercises.ex02.WordSegmenterDemo
+            [3] workshop.exercises.ex02.WordSegmenterDemo
             [4] ExampleLinearChainCRFDemo
             ...
             > 4
@@ -900,7 +897,40 @@ object BookInfoGain {
 
         <section data-markdown>
           <script type="text/template">
-            ## Linear-chain Conditional Random Fields
+            ## Linear-chain Conditional<br/>Random Fields
+
+            ... Code Walkthrough ...
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Information Gain<br/>(Kullback–Leibler Divergence)
+
+            - Build a model that approximates the full set of probabilities for a corpus of texts. 
+            - The "divergence" is a measure of how much the approximate model differs from the actual data.
+            - `workshop/exercises/ex04/BookInfoGain.scala`:
+            <br/>
+            Read and label a corpus, train a an online classifier, test it.
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Information Gain<br/>(Kullback–Leibler Divergence)
+
+            - Start `sbt`.
+            - This time, we'll use two different `run-main` commands:
+            ```
+            > run-main workshop.exercises.ex04.BookInfoGain data/enron_spam_ham/spam100.txt data/enron_spam_ham/ham100.txt
+            > run-main workshop.exercises.ex04.BookInfoGain data/prog_scala/
+            ```
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Information Gain<br/>(Kullback–Leibler Divergence)
 
             ... Code Walkthrough ...
           </script>

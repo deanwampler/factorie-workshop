@@ -1,5 +1,6 @@
 // Adapted from ExampleLinearChainCRF in 
 // http://factorie.cs.umass.edu/tutorials/UsersGuide01Introduction.scala.html
+package workshop.exercises.ex02
 
 object LinearChainCRFDemo extends App {
 
