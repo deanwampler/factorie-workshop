@@ -45,6 +45,8 @@ unzip factorie-workshop-data.zip
 
 On Windows, use any tool for expanding Zip files. Make sure the output `data` directory goes into the root directory for the workshop.
 
+Some of that data, the Enron email corpus classified as SPAM and HAM came from [this research project](http://www.aueb.gr/users/ion/data/enron-spam/).
+
 ### Run `sbt` to Setup the Workshop
 
 The repo includes the *de-facto* standard build tool for Scala, [sbt](http://www.scala-sbt.org/), which we'll use to download a pre-built copy of FACTORIE and work with it.
