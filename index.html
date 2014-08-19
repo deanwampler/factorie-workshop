@@ -36,7 +36,7 @@
     <div class="upper-left">
       <a href="http://typesafe.com"><img src="images/typesafe.png"></a>
     </div>
-    
+
     <div class="reveal">
 
       <!-- Any section element inside of this container is displayed as a slide -->
@@ -45,7 +45,7 @@
           <script type="text/template">
             # FACTORIE Tutorial
 
-            ## FACTORIE 
+            ## FACTORIE
 
             [factorie.cs.umass.edu/](http://factorie.cs.umass.edu/])
 
@@ -72,7 +72,7 @@
             ![Programming Hive](images/prog_hive_cover.png) ![Programming Scala 2nd Edition](images/prog_scala_2ed_cover.jpg) ![FP in Java](images/FPforJavaDevsCover.png)
           </script>
         </section>
-        
+
         <section data-markdown>
           <script type="text/template">
             ## Goals Today
@@ -90,7 +90,7 @@
             - Press ESC to enter the slide overview.
             - Click the arrows in the lower right corner to navigate.
             - Or use the arrow keys.
-          
+
             <small>(Slides written in [reveal.js](http://lab.hakim.se/reveal-js/).)</small>
           </script>
 
@@ -108,7 +108,7 @@
             1. Open [index.html?print-pdf](index.html?print-pdf).
             2. Print <!-- .element: class="fragment" data-fragment-index="2" -->
             3. Profit! <!-- .element: class="fragment" data-fragment-index="3" -->
-          
+
           </script>
         </section>
 
@@ -188,9 +188,9 @@
             ## Joint Probability Function
 
             - Prob. that it is wet, the sprinkler is on and it's raining:
-             
+
              $P(W,S,R) = P(W|S,R)P(S|R)P(R)$
-            
+
           </script>
         </section>
 
@@ -227,7 +227,7 @@
 
             - Decision Support Systems
               - Medical Diagnosis Decision Trees
-            - Document Classification 
+            - Document Classification
             - Information Retrieval
           </script>
         </section>
@@ -244,7 +244,7 @@
         <section data-markdown>
           <script type="text/template">
             ## Markov Random Field
-            ## (a.k.a. Markov Network) 
+            ## (a.k.a. Markov Network)
 
             ![Example Hidden Markov Model](images/Markov_random_field_example.png)
             <small>From [http://upload.wikimedia.org/wikipedia/en/f/f7/Markov_random_field_example.png](http://upload.wikimedia.org/wikipedia/en/f/f7/Markov_random_field_example.png)</small>
@@ -291,7 +291,7 @@
         <section data-markdown>
           <script type="text/template">
             ## Uses for Hidden Markov Model (2/2)
-            
+
             - Gene prediction
             - Alignment of bio-sequences
             - Protein folding
@@ -301,7 +301,7 @@
 
         <section>
           <h1>Factor Graphs</h1>
-            
+
           <img alt="Example Factor Graph" src="images/FactorGraph.png" width=450 /><br/>
           <small>From <a href="http://en.wikipedia.org/wiki/File:Factorgraph.jpg">en.wikipedia.org/wiki/File:Factorgraph.jpg</a></small>
         </section>
@@ -330,9 +330,9 @@
         </section>
 
         <section>
-          <p>$g(X_{1}, X_{2}, X_{3}) = f_{1}(X_{1})f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})f_{4}(X_{2},X_{3})$</p>
+          <p>$g(X_{1}, X_{2}, X_{3}) = f_{1}(X_{1})f_{2}(X_{1},X_{2})f_{3}(X_{1},X_{2})f_{4}(X_{2},X_{3})$</p>
           <p><img alt="Example Factor Graph" src="images/FactorGraph.png" height="350"/></p>
-          <p>Note that $f_{2}(X_{1},X_{3})f_{3}(X_{1},X_{2})$ form a <em>cycle</em>.</p>
+          <p>Note that $f_{2}(X_{1},X_{2})f_{3}(X_{1},X_{2})$ form a <em>cycle</em>.</p>
         </section>
 
         <section>
@@ -364,7 +364,7 @@
           <script type="text/template">
             ## *Factor Graphs and*
             ## *the Sum-Product Algorithm*
-            - Frank R. Kschischang, Brendan J. Frey, Hans-Andrea Loeliger, *IEEE Transactions On Information Theory*, Vol. 47, No. 2, February 2001. 
+            - Frank R. Kschischang, Brendan J. Frey, Hans-Andrea Loeliger, *IEEE Transactions On Information Theory*, Vol. 47, No. 2, February 2001.
               - <http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.54.1570>
           </script>
         </section>
@@ -382,7 +382,7 @@
         <section data-markdown>
           <script type="text/template">
           ## Bayes Network to Factor Graph
-            
+
           ![A Bayes Network as a Factor Graph](images/Bayes-to-FG.png)
           <small>Adapted from [Relational Factor Graphs](http://courses.cs.washington.edu/courses/cse574/05sp/slides/rfg-lin.ppt) (PPT).</small>
           </script>
@@ -391,7 +391,7 @@
         <section data-markdown>
           <script type="text/template">
           ## Markov Network to Factor Graph
-            
+
           ![A Markov Network as a Factor Graph](images/Markov-to-FG.png)
           <small>Adapted from [Relational Factor Graphs](http://courses.cs.washington.edu/courses/cse574/05sp/slides/rfg-lin.ppt) (PPT).</small>
           </script>
@@ -460,7 +460,7 @@
 
         <section data-markdown>
           <script type="text/template">
-            ## About FACTORIE 
+            ## About FACTORIE
 
             > FACTORIE is a toolkit for deployable probabilistic modeling, implemented as a software library in [Scala](http://scala-lang.org). It provides its users with a succinct language for creating factor graphs, estimating parameters and performing inference.
 
@@ -469,7 +469,7 @@
 
         <section data-markdown>
           <script type="text/template">
-            ## FACTORIE "Facts" 
+            ## FACTORIE "Facts"
 
             - Developed by a team at [U. Mass](http://factorie.cs.umass.edu/index.html).
             - Written in and uses [Scala](http://scala-lang.org) as the programming language.
@@ -482,7 +482,7 @@
 
         <section data-markdown>
           <script type="text/template">
-            ## FACTORIE "Facts" 
+            ## FACTORIE "Facts"
 
             - Built-in support for:
               - Random variables and factors
@@ -494,20 +494,20 @@
 
         <section data-markdown>
           <script type="text/template">
-            ## FACTORIE Pre-built Models and Tools  
+            ## FACTORIE Pre-built Models and Tools
 
             - Classification
               - Incl. document classification with MaxEnt, NaiveBayes, SVMs and Decision Trees.
             - Linear Regression
             - Linear-chain Conditional Random Fields
-            - Topic Modeling 
+            - Topic Modeling
               - e.g., Latent Dirichlet Allocation (LDA).
           </script>
         </section>
 
         <section data-markdown>
           <script type="text/template">
-            ## FACTORIE Pre-built Models and Tools  
+            ## FACTORIE Pre-built Models and Tools
 
             - Natural Language Processing
               - Including pipeline components like tokenization, sentence segmentation, part-of-speech tagging, named entity recognition, dependency parsing, and within-document coreference.
@@ -516,7 +516,7 @@
 
         <section data-markdown>
           <script type="text/template">
-            ## Learning FACTORIE 
+            ## Learning FACTORIE
 
             - Start with the [FACTORIE UserGuide - Introduction](http://factorie.cs.umass.edu/tutorials/UsersGuide01Introduction.scala.html).
               - High-level discussion of concepts.
@@ -528,15 +528,15 @@
 
         <section data-markdown>
           <script type="text/template">
-            ## Simple Command-line Examples 
+            ## Simple Command-line Examples
 
             - Find Topics Using LDA with Gibbs Sampling, 100 Iterations:
             ```
-            $FACTORIE_HOME/bin/fac lda --read-dirs mytextdir --num-topics 20 --num-iterations 100 
+            $FACTORIE_HOME/bin/fac lda --read-dirs mytextdir --num-topics 20 --num-iterations 100
             ```
             - Train a log-linear classifier using maximum likelihood estimation:
             ```
-            $FACTORIE_HOME/bin/fac classify --read-text-dirs dir1 dir2 \ 
+            $FACTORIE_HOME/bin/fac classify --read-text-dirs dir1 dir2 \
               --write-classifier myclassifier.factorie
             ```
             - (We'll use our own version of `fac`...)
@@ -617,7 +617,7 @@ object BookInfoGain {
 
         <section data-markdown>
           <script type="text/template">
-            ## Learning FACTORIE 
+            ## Learning FACTORIE
 
             - FACTORIE has its own Scala idioms.
             - We could get bogged down in the details.
@@ -628,7 +628,7 @@ object BookInfoGain {
 
         <section data-markdown>
           <script type="text/template">
-            ## Learning FACTORIE 
+            ## Learning FACTORIE
 
             - Instead, let's start with examples from the [Users Guide](http://factorie.cs.umass.edu/userguide.html)
 
@@ -649,8 +649,8 @@ object BookInfoGain {
             ```
             - It runs this command (*nix version):
             ```
-            bin/fac lda --read-dirs data/shakespeare \ 
-              --num-topics 20 --num-iterations 10 
+            bin/fac lda --read-dirs data/shakespeare \
+              --num-topics 20 --num-iterations 10
             ```
           </script>
         </section>
@@ -661,12 +661,12 @@ object BookInfoGain {
 
             - You can specify different `--num-topics` and `--num-terations` arguments:
             ```
-            exercises/lda shakespeare --num-topics 50 --num-iterations 100 
+            exercises/lda shakespeare --num-topics 50 --num-iterations 100
             ```
             - It runs this command:
             ```
-            bin/fac lda --read-dirs data/shakespeare \ 
-              --num-topics 20 --num-iterations 100 
+            bin/fac lda --read-dirs data/shakespeare \
+              --num-topics 20 --num-iterations 100
             ```
           </script>
         </section>
@@ -685,9 +685,9 @@ object BookInfoGain {
             ```
             - It runs this command:
             ```
-            bin/fac lda \ 
-              --read-dirs "data/enron_spam_ham/ham data/enron_spam_ham/spam" \ 
-              --num-topics 20 --num-iterations 10 
+            bin/fac lda \
+              --read-dirs "data/enron_spam_ham/ham data/enron_spam_ham/spam" \
+              --num-topics 20 --num-iterations 10
             ```
             - Try other values for `--num-topics` and `--num-terations`.
           </script>
@@ -713,13 +713,13 @@ object BookInfoGain {
             ```
             - It runs this long command:
             ```
-            bin/fac classify \ 
-              --write-vocabulary data/out/classifier/vocab \ 
-              --write-classifier data/out/classifier/enron_email \ 
-              --training-portion 0.8 \ 
-              --validation-portion 0.2 \ 
-              --trainer "new NaiveBayes" \ 
-              --read-text-encoding ISO-8859-1 \ 
+            bin/fac classify \
+              --write-vocabulary data/out/classifier/vocab \
+              --write-classifier data/out/classifier/enron_email \
+              --training-portion 0.8 \
+              --validation-portion 0.2 \
+              --trainer "new NaiveBayes" \
+              --read-text-encoding ISO-8859-1 \
               --read-text-dirs data/enron_spam_ham/spam data/enron_spam_ham/ham
             ```
           </script>
@@ -735,11 +735,11 @@ object BookInfoGain {
             ```
             - It runs this long command:
             ```
-            bin/fac classify \ 
-              --read-vocabulary data/out/classifier/vocab \ 
-              --read-classifier data/out/classifier/enron_email \ 
-              --write-classifications data/out/classification_results.txt \ 
-              --read-text-encoding ISO-8859-1 \ 
+            bin/fac classify \
+              --read-vocabulary data/out/classifier/vocab \
+              --read-classifier data/out/classifier/enron_email \
+              --write-classifications data/out/classification_results.txt \
+              --read-text-encoding ISO-8859-1 \
               --read-text-dirs data/unclassified
             ```
             - (NOTE: There are bugs in this result, at this time...)
@@ -762,7 +762,7 @@ object BookInfoGain {
 
             - `LinearVectorClassifierTrainer`: A "parent class" of other linear-vector classifier trainers:
               - `OptimizingLinearVectorClassifierTrainer`: Uses the `cc.factorie.optimize` package to estimate parameters.
-                - `OnlineOptimizingLinearVectorClassifierTrainer`: Pre-tuned with default arguments well-suited to online training, operating on the gradient of one Example at a time. 
+                - `OnlineOptimizingLinearVectorClassifierTrainer`: Pre-tuned with default arguments well-suited to online training, operating on the gradient of one Example at a time.
                 - ...
           </script>
         </section>
@@ -772,7 +772,7 @@ object BookInfoGain {
             ## Linear Vector Classifier (2/4)
 
             - `LinearVectorClassifierTrainer`: A "parent class" of other linear-vector classifier trainers:
-              - `OptimizingLinearVectorClassifierTrainer`: Uses the `cc.factorie.optimize` package to estimate parameters.              
+              - `OptimizingLinearVectorClassifierTrainer`: Uses the `cc.factorie.optimize` package to estimate parameters.
                 - ...
                 - `BatchOptimizingLinearVectorClassifierTrainer`: Pre-tuned with default arguments well-suited to batch training, operating on all the gradients of the Examples together.
                 - ...
@@ -795,7 +795,7 @@ object BookInfoGain {
             ## Linear Vector Classifier (4/4)
 
             - `LinearVectorClassifierTrainer`: A "parent class" of other linear-vector classifier trainers:
-              - ... 
+              - ...
               - `NaiveBayesClassifierTrainer`: A `LinearVectorClassifierTrainer` that, contrary to tradition, does not include a "bias" weight $P(class)$; it only includes the feature weights, $P(feature|class)$.
                 - What the exercise uses by default.
 
@@ -817,7 +817,7 @@ object BookInfoGain {
 
         <section data-markdown>
           <script type="text/template">
-            ## Decision Trees 
+            ## Decision Trees
 
             - `DecisionTreeClassifier`: parent class.
               - `ID3DecisionTreeClassifier`
@@ -952,7 +952,7 @@ object BookInfoGain {
           <script type="text/template">
             ## Information Gain<br/>(Kullback–Leibler Divergence)
 
-            - Build a model that approximates the full set of probabilities for a corpus of texts. 
+            - Build a model that approximates the full set of probabilities for a corpus of texts.
             - The "divergence" is a measure of how much the approximate model differs from the actual data.
             - `workshop/exercises/ex04/BookInfoGain.scala`:
             <br/>
@@ -1002,7 +1002,7 @@ object BookInfoGain {
           <script type="text/template">
             ## FACTORIE Cons
 
-            - Too advanced for novice Machine Learning users. 
+            - Too advanced for novice Machine Learning users.
             - Spare documentation.
             - Non-idiomatic Scala.
           </script>
@@ -1026,7 +1026,7 @@ object BookInfoGain {
             - [Introduction to Factor Graphs](http://people.binf.ku.dk/~thamelry/MLSB08/hal.pdf) (PDF).
             - [Relational Factor Graphs](http://courses.cs.washington.edu/courses/cse574/05sp/slides/rfg-lin.ppt) (PPT).
             - [IEEE Signal Processing, Jan. 2004](http://www.robots.ox.ac.uk/~parg/mlrg/papers/factorgraphs.pdf) (PDF).
-            - [Factor Graphs and the Sum-Product Algorithm](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.54.1570), Frank R. Kschischang, Brendan J. Frey, Hans-Andrea Loeliger, *IEEE Transactions On Information Theory*, Vol. 47, No. 2, February 2001. 
+            - [Factor Graphs and the Sum-Product Algorithm](http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.54.1570), Frank R. Kschischang, Brendan J. Frey, Hans-Andrea Loeliger, *IEEE Transactions On Information Theory*, Vol. 47, No. 2, February 2001.
           </script>
         </section>
 
@@ -1063,7 +1063,7 @@ object BookInfoGain {
           <script type="text/template">
             # Questions?
 
-            ## Dean Wampler 
+            ## Dean Wampler
 
             - [dean.wampler@typesafe.com](mailto:dean.wampler@typesafe.com)
             - [@deanwampler](http://twitter.com/deanwampler)
