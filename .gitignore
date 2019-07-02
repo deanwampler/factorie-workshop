@@ -8,3 +8,5 @@ project/target
 target
 data/out
 tmp
+.metals
+data
